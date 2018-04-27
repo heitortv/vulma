@@ -57,7 +57,7 @@
         .fixed.left(ref='dataFixedLeft', v-if='fixedColumnsLeft.length')
           table
             template(v-for='(row, rowIndex) in data')
-              tr.group(v-if='isFirstOfGroup(rowIndex)')
+              tr.group(v-if='row._vulma && isFirstOfGroup(rowIndex)')
                 td(ref='dataFixedGroupCol')
               tr(ref='dataFixedLeftRows', v-if='!row._vulma || isGroupOpened(row._vulma.group)', @click='onRowClick(row)', @mouseover='onMouseOverRow(rowIndex)', @mouseout='onMouseOutRow', :class='{ mouseover: rowIndex === rowIndexMouseOver }')
                 td(ref='dataFixedLeftCols', v-for='col in fixedColumnsLeft', v-show='col.visible', :class='[col.textAlign]')
@@ -67,7 +67,7 @@
         .scrollable(ref='data', @scroll='onScroll')
           table
             template(v-for='(row, rowIndex) in data')
-              tr.group(v-if='isFirstOfGroup(rowIndex)', @click='toggleGroup(row._vulma.group)')
+              tr.group(v-if='row._vulma && isFirstOfGroup(rowIndex)', @click='toggleGroup(row._vulma.group)')
                 td(ref='dataGroupCol', :colspan='scrollableColumns.length')
                   .icon: i.fa(:class="[ !row._vulma || isGroupOpened(row._vulma.group) ? 'fa-minus-square-o' : 'fa-plus-square-o' ]")
                   |  {{row._vulma.group}}
@@ -79,7 +79,7 @@
         .fixed.right(ref='dataFixedRight', v-if='fixedColumnsRight.length')
           table
             template(v-for='(row, rowIndex) in data')
-              tr.group(v-if='isFirstOfGroup(rowIndex)')
+              tr.group(v-if='row._vulma && isFirstOfGroup(rowIndex)')
                 td
               tr(ref='dataFixedRightRows', v-if='!row._vulma || isGroupOpened(row._vulma.group)', @click='onRowClick(row)', @mouseover='onMouseOverRow(rowIndex)', @mouseout='onMouseOutRow', :class='{ mouseover: rowIndex === rowIndexMouseOver }')
                 td(ref='dataFixedRightCols', v-for='col in fixedColumnsRight', v-show='col.visible', :class='[col.textAlign]')
