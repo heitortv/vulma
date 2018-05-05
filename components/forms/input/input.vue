@@ -2,7 +2,7 @@
   .field
     label.label(v-if='label', :class='sizeClass') {{label}}
     .control(:class='controlClass')
-      input.input(:value='model', :type='type', :placeholder='placeholder', :class='sizeClass', @input='onInput', @focus='onFocus')
+      input.input(:value='model', :type='type', :placeholder='placeholder', :class='`${sizeClass} ${colorClass}`', @input='onInput', @focus='onFocus')
       .icon.is-left(v-if='iconLeft', :class='sizeClass')
         i(:class='iconLeftClass')
       .icon.is-right(v-if='iconRight', :class='sizeClass')
@@ -13,10 +13,11 @@
 import { iconLeftRightMixin } from '../../../mixins/icon'
 import modelMixin from '../../../mixins/model'
 import sizeMixin from '../../../mixins/size'
+import colorMixin from '../../../mixins/color'
 
 export default {
   name: 'vulma-input',
-  mixins: [iconLeftRightMixin, modelMixin, sizeMixin],
+  mixins: [iconLeftRightMixin, modelMixin, sizeMixin, colorMixin],
   props: {
     value: {
       required: true
@@ -27,7 +28,7 @@ export default {
     },
     label: String,
     placeholder: String,
-    readOnly: [Boolean, String]
+    readOnly: [Boolean, String] 
   },
   computed: {
     controlClass: function () {

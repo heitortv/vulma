@@ -2,7 +2,7 @@
   .field
     label.label {{label}}
     .control
-      vulma-input(v-if='!opened', v-model='formattedSelectedText' :placeholder='placeholder', read-only, icon-right='fa-angle-down', @focus='open', :icon-left='icon', :size='size')
+      vulma-input(v-if='!opened', v-model='formattedSelectedText' :placeholder='placeholder', :color='color', read-only, icon-right='fa-angle-down', @focus='open', :icon-left='icon', :size='size')
       transition(:duration='{ enter: 700, leave: 0 }', enter-active-class='animated zoomIn')
         .box(v-if='opened', v-click-outside='close')
           vulma-input(v-if='enableSearch', v-model='searchTerm', icon-left='fa-search', size='small')
@@ -73,6 +73,7 @@ export default {
       type: String,
       default: 'Select a value'
     },
+    color: String,
     src: {
       type: Array,
       default: function () {
